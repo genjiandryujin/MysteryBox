@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ju1-h9-lsQ">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Login View Controller-->
+        <scene sceneID="cH7-bF-IcF">
+            <objects>
+                <viewController useStoryboardIdentifierAsRestorationIdentifier="YES" interfaceStyle="light" id="ju1-h9-lsQ" customClass="LoginViewController" customModule="MysteryBox" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="1Sv-Py-lvm">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lUc-AS-ea5" userLabel="LoginButton">
+                                <rect key="frame" x="82" y="323" width="250" height="250"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="lUc-AS-ea5" secondAttribute="height" multiplier="1:1" id="nQf-n4-aw0"/>
+                                </constraints>
+                                <state key="normal" image="Login"/>
+                                <connections>
+                                    <action selector="loginDidTap:" destination="goO-QN-lfg" eventType="touchUpInside" id="jRQ-4y-vuh"/>
+                                    <action selector="loginDidTap:" destination="ju1-h9-lsQ" eventType="touchUpInside" id="ma1-sC-tCd"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="Kax-hq-Bnd" firstAttribute="trailing" secondItem="lUc-AS-ea5" secondAttribute="trailing" constant="82" id="QJj-MX-nI0"/>
+                            <constraint firstItem="lUc-AS-ea5" firstAttribute="centerY" secondItem="1Sv-Py-lvm" secondAttribute="centerY" id="i12-mi-sQE"/>
+                            <constraint firstItem="lUc-AS-ea5" firstAttribute="centerX" secondItem="1Sv-Py-lvm" secondAttribute="centerX" id="whm-RD-fQW"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="Kax-hq-Bnd"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="4A1-hE-Afn"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dSc-Eq-Zhs" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <exit id="goO-QN-lfg" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="369.56521739130437" y="128.57142857142856"/>
+        </scene>
+        <!--Main View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController storyboardIdentifier="MainViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" interfaceStyle="light" id="BYZ-38-t0r" customClass="MainViewController" customModule="MysteryBox" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IvA-aV-V3T">
+                                <rect key="frame" x="163.5" y="378.5" width="87" height="30"/>
+                                <state key="normal" title="Pick To Save"/>
+                                <connections>
+                                    <action selector="addAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="vyM-4S-X0m"/>
+                                </connections>
+                            </button>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="WMS-hh-h5r">
+                                <rect key="frame" x="35.5" y="190.5" width="343" height="180"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="343" id="fBo-Ae-XHd"/>
+                                    <constraint firstAttribute="height" constant="180" id="jlC-Id-MOR"/>
+                                </constraints>
+                            </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="myN-ue-VPg">
+                                <rect key="frame" x="35.5" y="457.5" width="343" height="180"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="180" id="Fj5-0S-RMe"/>
+                                    <constraint firstAttribute="width" constant="343" id="oe9-zI-kV8"/>
+                                </constraints>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fIt-2g-Axl">
+                                <rect key="frame" x="114.5" y="644.5" width="185" height="30"/>
+                                <state key="normal" title="Get Image From Document"/>
+                                <connections>
+                                    <action selector="getImageFromDocument:" destination="BYZ-38-t0r" eventType="touchUpInside" id="7g7-Tc-7Aw"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="WMS-hh-h5r" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="2tY-s9-O8E"/>
+                            <constraint firstItem="IvA-aV-V3T" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="6sC-c7-R8o"/>
+                            <constraint firstItem="fIt-2g-Axl" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="7zz-wq-Yce"/>
+                            <constraint firstItem="WMS-hh-h5r" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" constant="-167.5" id="Aac-X3-Yjz"/>
+                            <constraint firstItem="myN-ue-VPg" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" constant="99.5" id="Eda-57-RhX"/>
+                            <constraint firstItem="fIt-2g-Axl" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" constant="211.5" id="TnB-Oh-h2a"/>
+                            <constraint firstItem="IvA-aV-V3T" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" constant="-54.5" id="eZP-JK-u6M"/>
+                            <constraint firstItem="myN-ue-VPg" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="iJ6-X0-1Ip"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                    </view>
+                    <connections>
+                        <outlet property="image" destination="WMS-hh-h5r" id="Tt4-1t-3WD"/>
+                        <outlet property="imageFromDocument" destination="myN-ue-VPg" id="tuN-bw-7of"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1397.1014492753625" y="127.90178571428571"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="Login" width="512" height="512"/>
+    </resources>
+</document>
