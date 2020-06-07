@@ -9,15 +9,14 @@
 import Foundation
 import UIKit
 
+enum StorageType {
+    case userDefaults
+    case fileSystem
+}
+
 class MainViewController: UIViewController {
     
-    enum StorageType {
-        case userDefaults
-        case fileSystem
-    }
-    
-    @IBOutlet weak var image: UIImageView!
-    @IBOutlet weak var imageFromDocument: UIImageView!
+    @IBOutlet weak var collectionView: UICollectionView!
     
     var picker = UIImagePickerController()
     
@@ -25,45 +24,47 @@ class MainViewController: UIViewController {
         super.viewDidLoad()
         picker.delegate = self
         setDocument()
+        collectionView.dataSource = self
+        collectionView.delegate = self
     }
     
-    
     @IBAction func addAction(_ sender: Any) {
-        
         if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
             picker.sourceType = .photoLibrary
             picker.mediaTypes = ["public.image", "public.movie"]
             present(picker, animated: true, completion: nil)
         }
-
     }
     
-    
-    @IBAction func getImageFromDocument(_ sender: Any) {
-        display()
+    func getFileName() -> String {
+        let date = Date()
+        let formatter = DateFormatter()
+        formatter.timeStyle = .medium
+        formatter.dateStyle = .short
+        var newDate = formatter.string(from: date)
+        newDate = newDate.replacingOccurrences(of: "/", with: "")
+        newDate = newDate.replacingOccurrences(of: " ", with: "")
+        newDate = newDate.replacingOccurrences(of: ":", with: "")
+        newDate = newDate.replacingOccurrences(of: ",", with: "")
+        newDate = newDate.replacingOccurrences(of: "PM", with: "")
+        newDate = newDate.replacingOccurrences(of: "AM", with: "")
+        return newDate
     }
     
     private func save(image: UIImage?) {
         if let buildingImage = image {
             DispatchQueue.global(qos: .background).async {
+                let filename = self.getFileName()
+                self.store(image: buildingImage.scaleImage(toSize: CGSize(width: 80.0, height: 80.0)),
+                           forKey: "\(filename)_thumbnail", withStorageType: .fileSystem)
                 self.store(image: buildingImage,
-                           forKey: "buildingImage",
-                           withStorageType: .fileSystem)
-            }
-        }
-    }
-    
-    private func display() {
-        DispatchQueue.global(qos: .background).async {
-            if let savedImage = self.retrieveImage(forKey: "buildingImage",
-                                                   inStorageType: .fileSystem) {
+                           forKey: filename, withStorageType: .fileSystem)
                 DispatchQueue.main.async {
-                    self.imageFromDocument.image = savedImage
+                    self.collectionView.reloadData()
                 }
             }
         }
     }
-    
 }
 
 extension MainViewController {
@@ -158,17 +159,53 @@ extension MainViewController {
 }
 
 extension MainViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-    
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         
         if let imagePicked = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
-            image.image = imagePicked
-            
             self.save(image: imagePicked)
         }
         
         dismiss(animated: true, completion: nil)
         
+    }
+}
+
+extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+        
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        
+        let yourWidth = collectionView.bounds.width/6.0
+        let yourHeight = yourWidth
+
+        return CGSize(width: yourWidth, height: yourHeight)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return getThumbnailImage().count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "imgBoxCell", for: indexPath) as! CollectionViewCell
+        let image = getThumbnailImage()
+        
+        if let savedImage = self.retrieveImage(forKey: image[indexPath.item].replacingOccurrences(of: ".png", with: ""),
+                                               inStorageType: .fileSystem) {
+            DispatchQueue.main.async {
+                cell.imageFromDoc.image = savedImage
+            }
+        }
+        
+        return cell
+    }
+    
+    func getThumbnailImage() -> [String] {
+        do {
+            let files = try FileManager().contentsOfDirectory(atPath: documentDirectory())
+            return files.filter{ $0.contains("_thumbnail") }
+        } catch {
+            print("Error: \(error)")
+            return [""]
+        }
     }
     
 }

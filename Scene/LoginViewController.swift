@@ -61,15 +61,10 @@ class LoginViewController: UIViewController {
     }
     
     func showModal() {
-//        let loginSuccess = MainViewController()
-//        loginSuccess.modalPresentationStyle = .fullScreen
-//        present(loginSuccess, animated: true, completion: nil)
-        
         let newViewController = self.storyboard?.instantiateViewController(withIdentifier: "MainViewController")
         newViewController?.modalTransitionStyle = .crossDissolve
         newViewController?.modalPresentationStyle = .fullScreen
         self.present(newViewController!, animated: true, completion: nil)
-        
     }
     
 }
