@@ -28,6 +28,11 @@ class MainViewController: UIViewController {
         collectionView.delegate = self
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.navigationBar.prefersLargeTitles = true
+    }
+    
     @IBAction func addAction(_ sender: Any) {
         if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
             picker.sourceType = .photoLibrary
@@ -174,10 +179,9 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
         
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-        let yourWidth = collectionView.bounds.width/6.0
-        let yourHeight = yourWidth
+        let yourWidth = collectionView.bounds.width / 6 - 1
 
-        return CGSize(width: yourWidth, height: yourHeight)
+        return CGSize(width: yourWidth, height: yourWidth)
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -196,6 +200,20 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
         }
         
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let image = getThumbnailImage()
+        let imageName = image[indexPath.item].replacingOccurrences(of: "_thumbnail.png", with: "")
+        if let vc = self.storyboard?.instantiateViewController(withIdentifier: "PhotoDetailedViewController") as? PhotoDetailedViewController {
+            if let image = self.retrieveImage(forKey: imageName, inStorageType: .fileSystem) {
+                vc.imageFromCollection = image
+                vc.titleName = imageName
+                vc.modalTransitionStyle = .crossDissolve
+                vc.modalPresentationStyle = .fullScreen
+                self.navigationController?.pushViewController(vc, animated: true)
+            }
+        }
     }
     
     func getThumbnailImage() -> [String] {
