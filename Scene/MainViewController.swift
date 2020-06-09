@@ -66,6 +66,7 @@ class MainViewController: UIViewController {
                            forKey: filename, withStorageType: .fileSystem)
                 DispatchQueue.main.async {
                     self.collectionView.reloadData()
+                    self.collectionView.collectionViewLayout.invalidateLayout()
                 }
             }
         }

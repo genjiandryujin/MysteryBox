@@ -121,7 +121,7 @@
         <!--Title-->
         <scene sceneID="9V7-Jv-qtc">
             <objects>
-                <viewController storyboardIdentifier="PhotoDetailedViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="eZt-Ul-Az6" customClass="PhotoDetailedViewController" customModule="MysteryBox" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="PhotoDetailedViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" interfaceStyle="light" id="eZt-Ul-Az6" customClass="PhotoDetailedViewController" customModule="MysteryBox" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="2D4-ke-Kfu">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -130,7 +130,7 @@
                                 <rect key="frame" x="0.0" y="44" width="414" height="852"/>
                             </imageView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="kVE-Vn-U9Z" secondAttribute="bottom" id="FME-g1-yd7"/>
                             <constraint firstItem="iq6-Xn-SvG" firstAttribute="trailing" secondItem="kVE-Vn-U9Z" secondAttribute="trailing" id="TFy-WK-MTW"/>

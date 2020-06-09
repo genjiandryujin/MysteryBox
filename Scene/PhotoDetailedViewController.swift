@@ -21,10 +21,26 @@ public class PhotoDetailedViewController: UIViewController {
     }
     
     func setupUI() {
+        navigationController?.navigationBar.prefersLargeTitles = false
         imagedDetailed?.image = imageFromCollection
-        navigationController?.title = titleName
-        navigationItem.title = titleName
         imagedDetailed?.enableZoom()
+        navigationItem.title = titleName
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "icBack"),
+                                                            style: .plain,
+                                                            target: self,
+                                                            action: #selector(backDidtap))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "lockic"),
+                                                            style: .plain,
+                                                            target: self,
+                                                            action: #selector(lockPhotoDidtap))
+    }
+    
+    @objc private func backDidtap() {
+        navigationController?.popViewController(animated: true)
+    }
+    
+    @objc private func lockPhotoDidtap() {
+        print("lockPhotoDidtap")
     }
     
 }
