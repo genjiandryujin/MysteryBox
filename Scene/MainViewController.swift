@@ -66,7 +66,6 @@ class MainViewController: UIViewController {
                            forKey: filename, withStorageType: .fileSystem)
                 DispatchQueue.main.async {
                     self.collectionView.reloadData()
-                    self.collectionView.collectionViewLayout.invalidateLayout()
                 }
             }
         }
@@ -180,9 +179,18 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
         
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-        let yourWidth = collectionView.bounds.width / 6 - 1
-
-        return CGSize(width: yourWidth, height: yourWidth)
+        let numberOfItemsPerRow:CGFloat = 5
+        let spacingBetweenCells:CGFloat = 16
+        
+        let totalSpacing = (2 * 16.0) + ((numberOfItemsPerRow - 1) * spacingBetweenCells) //Amount of total spacing in a row
+        
+        if let collection = self.collectionView{
+            let width = (collection.bounds.width - totalSpacing)/numberOfItemsPerRow
+            return CGSize(width: width, height: width)
+        }else{
+            return CGSize(width: 0, height: 0)
+        }
+        
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
